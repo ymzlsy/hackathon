@@ -32,8 +32,8 @@
       <div class="stats" id="home-stats"></div>
       <div class="home-grid">
         <div>
-          <div class="section-head"><h2>近期赛事</h2><a class="spacer btn" href="#/calendar">看日历 →</a></div>
-          <div class="rows" id="home-upcoming"></div>
+          <div class="section-head"><h2>赛事时间线</h2><a class="spacer btn" href="#/calendar">看日历 →</a></div>
+          <div class="tl" id="home-timeline"></div>
         </div>
         <div>
           <div class="panel-block" style="margin-bottom:20px">
@@ -58,12 +58,11 @@
         </div>
         <h2 id="cal-label"></h2>
       </div>
-      <div class="cal-grid" id="cal-grid"></div>
+      <div id="cal-grid"></div>
       <div class="cal-legend">
-        <span class="lg-up">未开始</span>
-        <span class="lg-on">进行中</span>
-        <span class="lg-en">已结束</span>
-        <span style="color:var(--text-faint)">点击赛事条查看详情</span>
+        <span style="color:var(--text-dim)">同色横条 = 同一赛事，跨越其举办日期</span>
+        <span style="color:var(--text-faint)">浅色 = 已结束</span>
+        <span style="color:var(--text-faint)">点击横条查看详情</span>
       </div>
     </section>
 

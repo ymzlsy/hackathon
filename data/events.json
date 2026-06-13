@@ -10,7 +10,30 @@
     "tags": ["AI", "青年", "国内", "线下", "硬件"],
     "prize": "待公布",
     "interest": "want",
-    "notes": "号称中国最大黑客松。5天线下，招约800名选手（14-26岁700人 + 26岁以上100人；中国700/海外100）。报名4月17日开放、活动前截止，仅个人申请，主办方现场协助组队。26岁以上有专门名额，值得认真考虑。"
+    "notes": "号称中国最大黑客松。5天/120小时，招约800名选手（14-26岁700人 + 26岁以上100人；中国700/海外100）。2026届报名4月17日开放、活动前截止，仅支持个人申请，到场后现场组队。对参赛者与游客全程免费，提供食宿、硬件与差旅补贴。26岁以上有专门名额，值得认真考虑。",
+    "links": [
+      { "label": "官网", "url": "https://adventure-x.org" },
+      { "label": "报名门户 United Portal", "url": "https://united.adventure-x.org" },
+      { "label": "作品集 Gallery（223 项目）", "url": "https://gallery.adventure-x.org" },
+      { "label": "FAQ", "url": "https://faq.adventure-x.org" },
+      { "label": "GitHub 组织", "url": "https://github.com/AdventureX-RGE" },
+      { "label": "2025 参赛项目合集", "url": "https://github.com/topics/adventurex2025" },
+      { "label": "2024 参赛项目合集", "url": "https://github.com/topics/adventurex2024" }
+    ],
+    "history": [
+      { "year": "2024", "theme": "首届。无固定大主题，现场公布 5 条赛道（含 Linear Capital「重塑日常工作流」），多选 AI / Web3 方向。", "format": "72 小时；2-4 人组队；杭州湖畔创研中心；面向 26 岁以下；提供食宿。", "scale": "报名 1200+，录取约 200 人。" },
+      { "year": "2025", "theme": "5 大主题赛道：ReMake 重新发明 / One World 智能向善 / All We Do 何以为人 / Gamify 游戏万物 / Just Do It 脑洞；另设 37 个赞助商赛道。", "format": "120 小时；杭州未来科技城；对所有人免费，提供食宿/硬件/差旅补贴；200+ 嘉宾评委。", "scale": "报名约 4500（全球 182 国/地区），到场 874 位青年，产出 200+ 项目，奖金池 ¥1,000,000。" },
+      { "year": "2026", "theme": "口号「为创造，再一次信仰之跃」。延续 5 大主题 + 多赞助商赛道，具体临近公布。", "format": "7/22-26，5 天/120 小时；杭州未来科技城（学术交流中心 + 湖畔创研中心）；免费，提供差旅补贴/食宿/硬件；仅个人报名。", "scale": "预计 800+ 青年创造者。报名 4/17 开放。" }
+    ],
+    "featured": [
+      { "title": "guii-devtools", "year": "2024", "award": "212 stars，star 最高", "url": "https://github.com/guiiai/guii-devtools", "note": "可嵌入前端项目的 AI 结对编程助手。" },
+      { "title": "tweet-talk (AI Tweet)", "year": "2024", "award": "Theme Alive 一等奖 + Dify.AI 二等奖", "url": "https://github.com/lcandy2/tweet-talk", "note": "AI 生成/改写推文工具，双料获奖。" },
+      { "title": "memora", "year": "2025", "award": "79 stars，topic 内最高", "url": "https://github.com/USTB-806/memora", "note": "Vue 写的 AI 收藏/知识管理，2025 届最受关注。" },
+      { "title": "anyspecs-cli", "year": "2025", "award": "65 stars", "url": "https://github.com/anyspecs/anyspecs-cli", "note": "把规格说明转为可执行产物的 Python CLI，配套 SpecShot 插件。" },
+      { "title": "AI-Watch-Buddy", "year": "2025", "award": "Best Audio Innovation", "url": "https://github.com/t41372/AI-Watch-Buddy", "note": "看视频时主动开口陪聊的 AI 伴侣，实时语音交互。" },
+      { "title": "AUTO-BATH", "year": "2025", "award": "AI Robot Game 一等奖", "url": "https://gallery.adventure-x.org", "note": "基于计算机视觉的自动洗浴机器人（详情见 Gallery）。" }
+    ],
+    "research": "AdventureX 由两位高中生发起、非营利方式募集百万级奖金运营，强调「为创造而创造」（Your world, Your change），面向 26 岁以下及在校学生，对参赛者与游客全程免费并提供食宿、硬件与差旅补贴。从 2024 首届约 200 人成长到 2025 届 800+ 创造者、4500+ 报名、200+ 项目、¥100 万奖金池。赞助方覆盖 Linear Capital、Rokid、理想、涂鸦智能、Seeed Studio、亚马逊云科技等。值得参加的理由：高密度青年创造者社群 + 导师/投资人资源、真实可落地的硬件+AI 支持、开源生态（自研 United Portal 办赛平台、Gallery 作品集、Playbook 手册）、零费用门槛。报名仅支持个人申请、不支持组队（现场再组队），2026 届 4/17 开放——需提前准备好个人作品/项目陈述。"
   },
   {
     "id": "luma-hackathon-2026-07",
@@ -275,7 +298,12 @@
     "location": "杭州",
     "tags": ["青年", "AI", "硬件", "国内", "线下"],
     "prize": "超100万奖金及礼品",
-    "notes": "中国规模最大青年黑客松，5天120小时极限创造。全球5000+报名遴选800+创客，产出200+项目，全程免费包食宿。AWS Kiro 等工具在此首发。"
+    "notes": "中国规模最大青年黑客松，5天120小时极限创造。全球4500+报名遴选800+创客，产出200+项目，全程免费包食宿。AWS Kiro 等工具在此首发。",
+    "links": [
+      { "label": "作品集 Gallery", "url": "https://gallery.adventure-x.org" },
+      { "label": "2025 参赛项目合集（GitHub）", "url": "https://github.com/topics/adventurex2025" },
+      { "label": "官网", "url": "https://adventure-x.org" }
+    ]
   },
   {
     "id": "ethglobal-cannes-2025",

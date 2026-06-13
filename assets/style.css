@@ -224,3 +224,61 @@ footer a:hover { color: var(--accent); }
 .modal .modal-meta .k { color: var(--text-faint); font-size: .8rem; }
 .modal .modal-close { float: right; cursor: pointer; color: var(--text-faint); font-size: 1.4rem; line-height: 1; }
 .modal .modal-close:hover { color: var(--text); }
+
+/* ---------- modal deep sections ---------- */
+.modal-sec { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
+.modal-sec .sec-k { font-size: .76rem; color: var(--text-faint); font-weight: 700; letter-spacing: .02em; margin-bottom: 9px; }
+.link-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.link-btns .btn { font-size: .82rem; padding: 6px 12px; }
+.hist { font-size: .88rem; margin-bottom: 11px; line-height: 1.5; }
+.hist:last-child { margin-bottom: 0; }
+.hist b { color: var(--accent); font-family: var(--mono); margin-right: 4px; }
+.hist-sub { color: var(--text-dim); font-size: .82rem; margin-top: 2px; }
+.feat { display: block; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 13px; margin-bottom: 8px; transition: all .15s; }
+.feat:hover { border-color: var(--accent); background: var(--accent-soft); }
+.feat b { font-size: .92rem; }
+.feat-y { font-family: var(--mono); font-size: .72rem; color: var(--text-faint); margin-left: 7px; }
+.feat-a { font-size: .72rem; color: var(--accent); margin-left: 7px; }
+.feat-n { font-size: .83rem; color: var(--text-dim); margin-top: 3px; line-height: 1.45; }
+.research { font-size: .88rem; color: var(--text-dim); white-space: pre-wrap; line-height: 1.6; }
+.badge.deep { background: var(--accent-soft); color: var(--accent); }
+
+/* ---------- calendar v2: connected per-event bars ---------- */
+.cal2 { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+.cal2-dow { display: grid; grid-template-columns: repeat(7, 1fr); background: var(--panel); }
+.cal2-dow div { padding: 9px 0; text-align: center; font-size: .78rem; font-weight: 600; color: var(--text-dim); }
+.cal2-week { position: relative; border-top: 1px solid var(--border); }
+.cal2-days { display: grid; grid-template-columns: repeat(7, 1fr); }
+.cal2-day { border-left: 1px solid var(--border); padding: 5px 7px; }
+.cal2-day:first-child { border-left: 0; }
+.cal2-day.other { background: #fbfaf8; }
+.cal2-day.other .cal2-daynum { color: var(--text-faint); }
+.cal2-day.today { box-shadow: inset 0 2px 0 var(--accent); }
+.cal2-day.today .cal2-daynum { color: var(--accent); font-weight: 700; }
+.cal2-daynum { font-size: .78rem; font-family: var(--mono); color: var(--text-dim); }
+.cal2-lanes { position: absolute; left: 0; right: 0; top: 26px; display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 21px; row-gap: 2px; padding: 0 5px; pointer-events: none; }
+.cal2-bar { pointer-events: auto; height: 19px; line-height: 18px; font-size: .72rem; font-weight: 600; padding: 0 7px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; border: 1px solid transparent; border-left-width: 0; border-right-width: 0; transition: filter .12s; }
+.cal2-bar.rl { border-left-width: 1px; border-top-left-radius: 6px; border-bottom-left-radius: 6px; }
+.cal2-bar.rr { border-right-width: 1px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; }
+.cal2-bar:hover { filter: brightness(.95); }
+
+@media (max-width: 640px) {
+  .cal2-bar { font-size: .62rem; padding: 0 4px; }
+  .cal2-day { padding: 4px 4px; }
+}
+
+/* ---------- home vertical timeline ---------- */
+.tl { position: relative; padding-left: 6px; }
+.tl::before { content: ""; position: absolute; left: 5px; top: 10px; bottom: 10px; width: 2px; background: var(--border); }
+.tl-item { position: relative; padding: 7px 0 7px 22px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.tl-item.ended { opacity: .62; }
+.tl-dot { position: absolute; left: 0; top: 12px; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); }
+.tl-date { font-family: var(--mono); font-size: .77rem; color: var(--text-faint); min-width: 88px; }
+.tl-main { flex: 1; min-width: 160px; }
+.tl-name { font-weight: 600; font-size: .95rem; cursor: pointer; }
+.tl-name:hover { color: var(--accent); }
+.tl-plat { font-size: .8rem; color: var(--text-dim); margin-left: 8px; }
+.deep-dot { font-size: .8rem; }
+.tl-now { padding: 4px 0 4px 22px; }
+.tl-now .tl-dot { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.tl-now-label { font-family: var(--mono); font-size: .8rem; font-weight: 700; color: var(--accent); }
