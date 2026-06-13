@@ -1,12 +1,22 @@
 [
   {
-    "id": "sample-idea-001",
-    "title": "用这个站记录我的 Hackathon 旅程（示例·待替换）",
+    "id": "idea-watch-adventurex",
+    "title": "盯紧 AdventureX 2026 报名",
     "date": "2026-06-13",
-    "status": "building",
-    "tags": ["元", "建站"],
+    "status": "spark",
+    "tags": ["报名", "AdventureX"],
+    "relatedEvent": "AdventureX 2026",
+    "relatedWork": "",
+    "body": "AdventureX 7月22-26在杭州，26岁以上有100个名额。\n这是国内最值得下场的一场，得趁早定个项目方向再申请。\n待办：想清楚做什么 → 准备申请材料 → 报名。"
+  },
+  {
+    "id": "idea-site-built",
+    "title": "搭好了自己的 Hackathon 记录站",
+    "date": "2026-06-13",
+    "status": "shipped",
+    "tags": ["建站", "元"],
     "relatedEvent": "",
     "relatedWork": "",
-    "body": "示例数据。\n这是第一条想法：搭一个属于自己的 Hackathon 记录站，把感兴趣的赛事、看到的好作品、自己的点子都沉淀下来。\n下一步：填入真实赛事，挑一个合适的报名参加。"
+    "body": "hackathon.karaithy.com 上线。\n用来追踪各平台赛事、收藏好作品、沉淀想法。\n下一步：让它能定期自动发现新赛事，而不是全靠手动录。"
   }
 ]

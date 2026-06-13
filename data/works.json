@@ -1,28 +1,41 @@
 [
   {
-    "id": "sample-mine-001",
-    "title": "我的第一个作品（示例·待替换）",
-    "type": "mine",
-    "event": "Claude Builder Hackathon",
-    "author": "Mike",
+    "id": "xhs-pocket-guitar",
+    "title": "口袋吉他 Pocket Guitar",
+    "type": "inspiration",
+    "event": "小红书首届黑客松巅峰赛",
+    "author": "参赛团队",
     "url": "",
     "repo": "",
     "cover": "",
-    "tags": ["AI", "Agent"],
-    "summary": "示例数据：一句话讲清这个作品做了什么。把它替换成你真正做的东西。",
-    "date": "2026-06-13"
+    "tags": ["硬件", "音乐", "AI"],
+    "summary": "小红书黑客松全场大奖。便携智能硬件，把弹吉他这件事做成口袋里随身可玩的形态——软硬结合、完成度高的典型获奖思路。",
+    "date": "2026-04-10"
   },
   {
-    "id": "sample-inspiration-001",
-    "title": "一个让我眼前一亮的作品（示例·待替换）",
+    "id": "xhs-chic-chic",
+    "title": "Chic Chic（AI 发型设计）",
     "type": "inspiration",
-    "event": "某平台赛事",
-    "author": "某团队",
-    "url": "https://devpost.com/",
+    "event": "小红书首届黑客松巅峰赛",
+    "author": "参赛团队",
+    "url": "",
     "repo": "",
     "cover": "",
-    "tags": ["创意", "可视化"],
-    "summary": "示例数据：收藏别人的好作品，记下为什么有意思、可以借鉴什么。",
-    "date": "2026-06-10"
+    "tags": ["AI", "软件", "时尚"],
+    "summary": "小红书黑客松软件赛道一等奖。AI 发型设计产品，贴小红书的内容/审美场景，切口小但用户价值清晰。",
+    "date": "2026-04-10"
+  },
+  {
+    "id": "xhs-brain-wheelchair",
+    "title": "脑控轮椅",
+    "type": "inspiration",
+    "event": "小红书首届黑客松巅峰赛",
+    "author": "参赛团队",
+    "url": "",
+    "repo": "",
+    "cover": "",
+    "tags": ["硬件", "无障碍", "脑机接口"],
+    "summary": "小红书黑客松硬件赛道一等奖。脑机接口 + 轮椅，面向无障碍场景，48 小时内做出可演示的硬件，技术与社会价值兼具。",
+    "date": "2026-04-10"
   }
 ]

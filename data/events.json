@@ -1,5 +1,31 @@
 [
   {
+    "id": "adventurex-2026",
+    "name": "AdventureX 2026",
+    "platform": "AdventureX",
+    "url": "https://adventure-x.org/en",
+    "start": "2026-07-22",
+    "end": "2026-07-26",
+    "location": "杭州·未来科技城",
+    "tags": ["AI", "青年", "国内", "线下", "硬件"],
+    "prize": "待公布",
+    "interest": "want",
+    "notes": "号称中国最大黑客松。5天线下，招约800名选手（14-26岁700人 + 26岁以上100人；中国700/海外100）。报名4月17日开放、活动前截止，仅个人申请，主办方现场协助组队。26岁以上有专门名额，值得认真考虑。"
+  },
+  {
+    "id": "luma-hackathon-2026-07",
+    "name": "LUMA Hackathon",
+    "platform": "Devpost",
+    "url": "https://luma-hackathon-500.devpost.com/",
+    "start": "2026-07-03",
+    "end": "2026-07-10",
+    "location": "Online",
+    "tags": ["AI", "ML", "新手友好"],
+    "prize": "最高 $200",
+    "interest": "watch",
+    "notes": "线上、新手友好的 ML/AI 黑客松。7月3日公布主题，7月10日 11:45pm EDT 截止提交。门槛低，适合先下场练手刷作品集。"
+  },
+  {
     "id": "xiaohongshu-hackathon-2026",
     "name": "小红书首届黑客松巅峰赛",
     "platform": "小红书",
@@ -11,57 +37,5 @@
     "prize": "全场大奖 + 软硬件赛道奖",
     "interest": "watch",
     "notes": "首届。3月20日启动报名，200名入围选手限时48h开发+路演。超60%为00后，最小12岁。高瓴创投引入，联合张江AI小镇主办。亮点作品：全场大奖「口袋吉他Pocket Guitar」、软件一等奖AI发型设计「Chic Chic」、硬件一等奖「脑控轮椅」。"
-  },
-  {
-    "id": "sample-anthropic-claude-builder",
-    "name": "Claude Builder Hackathon（示例·待替换）",
-    "platform": "Anthropic",
-    "url": "https://www.anthropic.com/",
-    "start": "2026-06-20",
-    "end": "2026-06-22",
-    "location": "Online",
-    "tags": ["AI", "Agent", "Claude"],
-    "prize": "$25,000",
-    "interest": "want",
-    "notes": "示例数据。用 Claude Agent SDK 做点东西，正好练手。把这条替换成真实赛事。"
-  },
-  {
-    "id": "sample-devpost-global-ai",
-    "name": "Global AI Hackathon（示例·待替换）",
-    "platform": "Devpost",
-    "url": "https://devpost.com/hackathons",
-    "start": "2026-07-01",
-    "end": "2026-07-14",
-    "location": "Online",
-    "tags": ["AI", "Web"],
-    "prize": "$10,000",
-    "interest": "watch",
-    "notes": "示例数据。Devpost 上常年有线上赛，门槛低、适合刷作品集。"
-  },
-  {
-    "id": "sample-mlh-hackweekend",
-    "name": "MLH Hack Weekend（示例·待替换）",
-    "platform": "MLH",
-    "url": "https://mlh.io/seasons/2026/events",
-    "start": "2026-06-28",
-    "end": "2026-06-29",
-    "location": "Online",
-    "tags": ["学生", "周末赛"],
-    "prize": "Swag + 证书",
-    "interest": "watch",
-    "notes": "示例数据。Major League Hacking，全年滚动的周末黑客松。"
-  },
-  {
-    "id": "sample-tianchi-llm",
-    "name": "天池大模型应用赛（示例·待替换）",
-    "platform": "阿里云天池",
-    "url": "https://tianchi.aliyun.com/competition",
-    "start": "2026-05-15",
-    "end": "2026-06-30",
-    "location": "Online",
-    "tags": ["AI", "国内", "大模型"],
-    "prize": "￥100,000",
-    "interest": "want",
-    "notes": "示例数据。国内平台，奖金高、周期长，适合慢工出细活。"
   }
 ]
