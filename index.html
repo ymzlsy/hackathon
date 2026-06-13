@@ -50,20 +50,26 @@
 
     <!-- CALENDAR -->
     <section class="view" id="view-calendar">
-      <div class="cal-head">
-        <div class="cal-nav">
+      <div class="cal-bar">
+        <div class="seg" id="cal-mode">
+          <button data-mode="track" class="active">轨道视图</button>
+          <button data-mode="month">月历</button>
+        </div>
+        <div class="cal-ctrl" id="cal-ctrl-month" style="display:none">
           <button class="btn" id="cal-prev">←</button>
           <button class="btn" id="cal-today">今天</button>
           <button class="btn" id="cal-next">→</button>
+          <span id="cal-label"></span>
         </div>
-        <h2 id="cal-label"></h2>
+        <div class="seg" id="cal-density">
+          <button data-d="20">紧凑</button>
+          <button data-d="32" class="active">标准</button>
+          <button data-d="48">宽松</button>
+        </div>
       </div>
-      <div id="cal-grid"></div>
-      <div class="cal-legend">
-        <span style="color:var(--text-dim)">同色横条 = 同一赛事，跨越其举办日期</span>
-        <span style="color:var(--text-faint)">浅色 = 已结束</span>
-        <span style="color:var(--text-faint)">点击横条查看详情</span>
-      </div>
+      <div id="cal-track"></div>
+      <div id="cal-grid" style="display:none"></div>
+      <div class="cal-legend" id="cal-legend"></div>
     </section>
 
     <!-- EVENTS -->
