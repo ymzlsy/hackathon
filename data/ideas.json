@@ -1,0 +1,12 @@
+[
+  {
+    "id": "sample-idea-001",
+    "title": "用这个站记录我的 Hackathon 旅程（示例·待替换）",
+    "date": "2026-06-13",
+    "status": "building",
+    "tags": ["元", "建站"],
+    "relatedEvent": "",
+    "relatedWork": "",
+    "body": "示例数据。\n这是第一条想法：搭一个属于自己的 Hackathon 记录站，把感兴趣的赛事、看到的好作品、自己的点子都沉淀下来。\n下一步：填入真实赛事，挑一个合适的报名参加。"
+  }
+]

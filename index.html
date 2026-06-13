@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hackathon · Karaithy</title>
+  <meta name="description" content="记录各平台 Hackathon 赛事、有意思的作品与我自己的想法。" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="#/home" class="logo">Hack<span class="ai">ai</span>thon<span class="sub">karaithy.com</span></a>
+      <nav class="tabs" id="tabs">
+        <a href="#/home" data-view="home">概览</a>
+        <a href="#/calendar" data-view="calendar">日历</a>
+        <a href="#/events" data-view="events">赛事库</a>
+        <a href="#/works" data-view="works">作品</a>
+        <a href="#/ideas" data-view="ideas">想法</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HOME -->
+    <section class="view" id="view-home">
+      <div class="hero">
+        <h1>记录我的 <span class="ai">Hack</span>athon 旅程</h1>
+        <p class="lead">追踪各平台与公司举办的黑客松、收藏有意思的作品、沉淀自己的点子并把它们做出来。挑一个合适的，下场。</p>
+      </div>
+      <div class="stats" id="home-stats"></div>
+      <div class="home-grid">
+        <div>
+          <div class="section-head"><h2>近期赛事</h2><a class="spacer btn" href="#/calendar">看日历 →</a></div>
+          <div class="rows" id="home-upcoming"></div>
+        </div>
+        <div>
+          <div class="panel-block" style="margin-bottom:20px">
+            <h3 class="block-title">⚡ 最新想法</h3>
+            <div class="rows" id="home-ideas"></div>
+          </div>
+          <div class="panel-block">
+            <h3 class="block-title">🏆 最近作品</h3>
+            <div class="rows" id="home-works"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALENDAR -->
+    <section class="view" id="view-calendar">
+      <div class="cal-head">
+        <div class="cal-nav">
+          <button class="btn" id="cal-prev">←</button>
+          <button class="btn" id="cal-today">今天</button>
+          <button class="btn" id="cal-next">→</button>
+        </div>
+        <h2 id="cal-label"></h2>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <div class="cal-legend">
+        <span class="lg-up">未开始</span>
+        <span class="lg-on">进行中</span>
+        <span class="lg-en">已结束</span>
+        <span style="color:var(--text-faint)">点击赛事条查看详情</span>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="view" id="view-events">
+      <div class="section-head"><h2>赛事库</h2><span class="count" id="events-count"></span></div>
+      <div class="filters">
+        <input class="search" id="events-search" placeholder="搜索赛事名 / 平台 / 标签…" />
+      </div>
+      <div class="filters" id="events-status-filter"></div>
+      <div class="filters" id="events-platform-filter"></div>
+      <div class="cards" id="events-cards"></div>
+    </section>
+
+    <!-- WORKS -->
+    <section class="view" id="view-works">
+      <div class="section-head"><h2>作品</h2><span class="count" id="works-count"></span></div>
+      <div class="filters" id="works-filter">
+        <button class="chip active" data-type="all">全部</button>
+        <button class="chip" data-type="mine">我的作品</button>
+        <button class="chip" data-type="inspiration">收藏的好作品</button>
+      </div>
+      <div class="cards" id="works-cards"></div>
+    </section>
+
+    <!-- IDEAS -->
+    <section class="view" id="view-ideas">
+      <div class="section-head"><h2>想法</h2><span class="count" id="ideas-count"></span></div>
+      <div class="filters" id="ideas-filter">
+        <button class="chip active" data-status="all">全部</button>
+        <button class="chip" data-status="spark">灵感</button>
+        <button class="chip" data-status="building">在做</button>
+        <button class="chip" data-status="shipped">已发布</button>
+      </div>
+      <div id="ideas-list"></div>
+    </section>
+  </main>
+
+  <div class="modal-bg" id="modal-bg">
+    <div class="modal" id="modal"></div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <span>Hack<span style="color:var(--accent)">ai</span>thon · 个人 Hackathon 记录站</span>
+      <span class="links-inline">数据维护：<code>data/*.json</code> · <a href="https://karaithy.com">karaithy.com</a></span>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

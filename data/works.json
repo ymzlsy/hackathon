@@ -1,0 +1,28 @@
+[
+  {
+    "id": "sample-mine-001",
+    "title": "我的第一个作品（示例·待替换）",
+    "type": "mine",
+    "event": "Claude Builder Hackathon",
+    "author": "Mike",
+    "url": "",
+    "repo": "",
+    "cover": "",
+    "tags": ["AI", "Agent"],
+    "summary": "示例数据：一句话讲清这个作品做了什么。把它替换成你真正做的东西。",
+    "date": "2026-06-13"
+  },
+  {
+    "id": "sample-inspiration-001",
+    "title": "一个让我眼前一亮的作品（示例·待替换）",
+    "type": "inspiration",
+    "event": "某平台赛事",
+    "author": "某团队",
+    "url": "https://devpost.com/",
+    "repo": "",
+    "cover": "",
+    "tags": ["创意", "可视化"],
+    "summary": "示例数据：收藏别人的好作品，记下为什么有意思、可以借鉴什么。",
+    "date": "2026-06-10"
+  }
+]

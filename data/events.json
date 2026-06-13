@@ -1,0 +1,54 @@
+[
+  {
+    "id": "sample-anthropic-claude-builder",
+    "name": "Claude Builder Hackathon（示例·待替换）",
+    "platform": "Anthropic",
+    "url": "https://www.anthropic.com/",
+    "start": "2026-06-20",
+    "end": "2026-06-22",
+    "location": "Online",
+    "tags": ["AI", "Agent", "Claude"],
+    "prize": "$25,000",
+    "interest": "want",
+    "notes": "示例数据。用 Claude Agent SDK 做点东西，正好练手。把这条替换成真实赛事。"
+  },
+  {
+    "id": "sample-devpost-global-ai",
+    "name": "Global AI Hackathon（示例·待替换）",
+    "platform": "Devpost",
+    "url": "https://devpost.com/hackathons",
+    "start": "2026-07-01",
+    "end": "2026-07-14",
+    "location": "Online",
+    "tags": ["AI", "Web"],
+    "prize": "$10,000",
+    "interest": "watch",
+    "notes": "示例数据。Devpost 上常年有线上赛，门槛低、适合刷作品集。"
+  },
+  {
+    "id": "sample-mlh-hackweekend",
+    "name": "MLH Hack Weekend（示例·待替换）",
+    "platform": "MLH",
+    "url": "https://mlh.io/seasons/2026/events",
+    "start": "2026-06-28",
+    "end": "2026-06-29",
+    "location": "Online",
+    "tags": ["学生", "周末赛"],
+    "prize": "Swag + 证书",
+    "interest": "watch",
+    "notes": "示例数据。Major League Hacking，全年滚动的周末黑客松。"
+  },
+  {
+    "id": "sample-tianchi-llm",
+    "name": "天池大模型应用赛（示例·待替换）",
+    "platform": "阿里云天池",
+    "url": "https://tianchi.aliyun.com/competition",
+    "start": "2026-05-15",
+    "end": "2026-06-30",
+    "location": "Online",
+    "tags": ["AI", "国内", "大模型"],
+    "prize": "￥100,000",
+    "interest": "want",
+    "notes": "示例数据。国内平台，奖金高、周期长，适合慢工出细活。"
+  }
+]
