@@ -52,7 +52,7 @@
     <section class="view" id="view-calendar">
       <div class="cal-bar">
         <div class="seg" id="cal-mode">
-          <button data-mode="track" class="active">轨道视图</button>
+          <button data-mode="year" class="active">年视图</button>
           <button data-mode="month">月历</button>
         </div>
         <div class="cal-ctrl" id="cal-ctrl-month" style="display:none">
@@ -61,13 +61,8 @@
           <button class="btn" id="cal-next">→</button>
           <span id="cal-label"></span>
         </div>
-        <div class="seg" id="cal-density">
-          <button data-d="20">紧凑</button>
-          <button data-d="32" class="active">标准</button>
-          <button data-d="48">宽松</button>
-        </div>
       </div>
-      <div id="cal-track"></div>
+      <div id="cal-year"></div>
       <div id="cal-grid" style="display:none"></div>
       <div class="cal-legend" id="cal-legend"></div>
     </section>

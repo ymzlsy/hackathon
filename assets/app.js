@@ -182,22 +182,20 @@ function openEvent(id) {
 
 /* ---------- CALENDAR ---------- */
 let calY, calM;            // 月历：年 / 月(0-11)
-let calMode = "track";     // track | month
-let trackDensity = 32;     // 轨道视图每天像素宽
+let calMode = "year";      // year（一年小格子热力图）| month（月历）
 function initCal() { const t = new Date(); calY = t.getFullYear(); calM = t.getMonth(); }
 
 function renderCalendar() {
   if (calY === undefined) initCal();
   const month = calMode === "month";
-  $("#cal-track").style.display = month ? "none" : "block";
+  $("#cal-year").style.display = month ? "none" : "block";
   $("#cal-grid").style.display = month ? "block" : "none";
   $("#cal-ctrl-month").style.display = month ? "flex" : "none";
-  $("#cal-density").style.display = month ? "none" : "flex";
   $$("#cal-mode button").forEach(b => b.classList.toggle("active", b.dataset.mode === calMode));
   $("#cal-legend").innerHTML = month
     ? `<span style="color:var(--text-dim)">同色横条 = 同一赛事，跨越其举办日期</span><span style="color:var(--text-faint)">浅色 = 已结束 · 点击查看详情 · 滚轮翻月</span>`
-    : `<span style="color:var(--text-dim)">每条 = 一个赛事，长度对应天数</span><span style="color:var(--text-faint)">竖线 = 今天 · 浅色 = 已结束 · 点击查看详情</span><span style="color:var(--text-faint)">滚轮 / 触控板左右滑动 · 紧凑·标准·宽松调密度</span>`;
-  if (month) renderMonth(); else renderTrack();
+    : `<span style="color:var(--text-dim)">共 ${DB.events.length} 场赛事 · 每格 = 一天</span><span class="hm-legend">少 <i class="cell"></i><i class="cell lv1"></i><i class="cell lv2"></i><i class="cell lv3"></i><i class="cell lv4"></i> 多</span><span style="color:var(--text-faint)">⭘ 圈为今天 · 悬停看当天 · 点击查看详情</span>`;
+  if (month) renderMonth(); else renderYear();
 }
 
 /* 滚轮翻月 */
@@ -268,61 +266,58 @@ function renderMonth() {
   grid.onwheel = monthWheel;
 }
 
-/* ---------- 轨道视图（横向时间轴 / Gantt）---------- */
-function renderTrack() {
-  const wrap = $("#cal-track");
-  const evs = [...DB.events].sort((a, b) => a.start.localeCompare(b.start));
+/* ---------- 年视图（GitHub 贡献图式一年小格子）---------- */
+function renderYear() {
+  const wrap = $("#cal-year");
+  const evs = DB.events;
   if (!evs.length) { wrap.innerHTML = emptyBlock("还没有赛事"); return; }
   let minISO = evs[0].start, maxISO = evs[0].end;
   for (const e of evs) { if (e.start < minISO) minISO = e.start; if (e.end > maxISO) maxISO = e.end; }
-  const sD = parseD(minISO); sD.setDate(1);                                   // 从最早赛事所在月 1 号起
-  const eD = parseD(maxISO); eD.setMonth(eD.getMonth() + 1); eD.setDate(0);   // 到最晚赛事所在月末
-  const DAY = trackDensity, HEAD = 40, ROWH = 27, PAD = 10;
-  const dayIdx = (iso) => Math.round((parseD(iso) - sD) / 86400000);
-  const total = Math.round((eD - sD) / 86400000) + 1;
-  const W = total * DAY;
-
-  // 车道打包：同赛事一条，互不重叠
-  const lanes = [], segs = [];
-  for (const e of evs) {
-    const a = dayIdx(e.start), b = dayIdx(e.end);
-    let l = 0;
-    while ((lanes[l] || []).some(p => !(b < p.a || a > p.b))) l++;
-    (lanes[l] || (lanes[l] = [])).push({ a, b });
-    segs.push({ e, a, b, l });
-  }
-  const H = HEAD + lanes.length * ROWH + PAD;
-
-  // 月份网格线 + 标签
-  let ticks = "";
-  const cur = new Date(sD);
-  while (cur <= eD) {
-    const x = Math.round((cur - sD) / 86400000) * DAY;
-    ticks += `<div class="trk-mtick" style="left:${x}px"></div><div class="trk-mlabel" style="left:${x + 5}px">${cur.getFullYear()}.${String(cur.getMonth() + 1).padStart(2, "0")}</div>`;
-    cur.setMonth(cur.getMonth() + 1);
-  }
-  // 今天竖线
+  // 网格起点 = 最早赛事所在周的周日；终点 = 最晚赛事所在周的周六
+  const start = parseD(minISO); start.setDate(start.getDate() - start.getDay());
+  const end = parseD(maxISO); end.setDate(end.getDate() + (6 - end.getDay()));
   const tISO = todayISO();
-  let todayLine = "";
-  if (tISO >= isoOf(sD) && tISO <= isoOf(eD)) {
-    const tx = dayIdx(tISO) * DAY + DAY / 2;
-    todayLine = `<div class="trk-today" style="left:${tx}px"><span>今天</span></div>`;
-  }
-  // 赛事横条
-  const bars = segs.map(s => {
-    const col = evColor(s.e.id), ended = statusOf(s.e) === "ended";
-    const left = s.a * DAY + 1, w = Math.max(DAY - 2, (s.b - s.a + 1) * DAY - 2), top = HEAD + s.l * ROWH;
-    return `<div class="trk-bar" style="left:${left}px;width:${w}px;top:${top}px;background:${col.bg};border-color:${col.bd};color:${col.fg};${ended ? "opacity:.6;" : ""}" onclick="openEvent('${s.e.id}')" title="${esc(s.e.name)} · ${fmtRange(s.e.start, s.e.end)}">${esc(s.e.name)}</div>`;
-  }).join("");
 
-  wrap.innerHTML = `<div class="trk-scroll"><div class="trk-inner" style="width:${W}px;height:${H}px">${ticks}${todayLine}${bars}</div></div>`;
-  const sc = wrap.querySelector(".trk-scroll");
-  // 默认锚定到最近的未来赛事（没有则锚到最近一场），让首屏就有内容、对准最该关注的近期赛事
-  const up = evs.filter(e => e.start > tISO).sort((a, b) => a.start.localeCompare(b.start));
-  const anchorISO = up.length ? up[0].start : (tISO > isoOf(eD) ? isoOf(eD) : (tISO < isoOf(sD) ? isoOf(sD) : tISO));
-  sc.scrollLeft = Math.max(0, dayIdx(anchorISO) * DAY - sc.clientWidth * 0.5);
-  // 竖向滚轮 → 横向滚动（触控板天然支持横滑）
-  sc.onwheel = (ev) => { if (Math.abs(ev.deltaY) > Math.abs(ev.deltaX)) { sc.scrollLeft += ev.deltaY; ev.preventDefault(); } };
+  // 每天 -> 当天赛事（赛事跨天则每天都标）
+  const dayEvents = {};
+  for (const e of evs) {
+    let d = parseD(e.start); const de = parseD(e.end);
+    while (d <= de) { const k = isoOf(d); (dayEvents[k] || (dayEvents[k] = [])).push(e); d.setDate(d.getDate() + 1); }
+  }
+
+  const weeks = Math.round((end - start) / (86400000 * 7)) + 1;
+  let cells = "", months = "";
+  const cur = new Date(start); let prevMonth = -1;
+  for (let w = 0; w < weeks; w++) {
+    const colMonth = cur.getMonth();
+    months += `<div class="hm-mcol">${(w === 0 || colMonth !== prevMonth) ? `<span class="hm-mlabel">${colMonth + 1}月</span>` : ""}</div>`;
+    prevMonth = colMonth;
+    for (let d = 0; d < 7; d++) {
+      const k = isoOf(cur);
+      const on = dayEvents[k] || [];
+      let cls = "cell";
+      if (on.length) cls += " lv" + Math.min(on.length, 4);
+      if (k === tISO) cls += " today";
+      cells += `<div class="${cls}" data-d="${k}" title="${esc(k + (on.length ? "：" + on.map(e => e.name).join(" / ") : "（无赛事）"))}"></div>`;
+      cur.setDate(cur.getDate() + 1);
+    }
+  }
+  const dows = ["", "一", "", "三", "", "五", ""];
+  wrap.innerHTML = `<div class="hm"><div class="hm-inner">
+    <div class="hm-months">${months}</div>
+    <div class="hm-body"><div class="hm-dows">${dows.map(x => `<div class="hm-dow">${x}</div>`).join("")}</div><div class="hm-grid">${cells}</div></div>
+  </div></div>`;
+  wrap.querySelector(".hm-grid").onclick = (ev) => {
+    const c = ev.target.closest(".cell"); if (!c) return;
+    const list = dayEvents[c.dataset.d]; if (!list || !list.length) return;
+    if (list.length === 1) openEvent(list[0].id); else showModal(dayListHtml(c.dataset.d, list));
+  };
+}
+function dayListHtml(iso, list) {
+  return `<span class="modal-close" onclick="closeModal()">×</span>
+    <h3>${fmtDate(iso)}</h3>
+    <div style="color:var(--text-faint);font-size:.82rem">当天 ${list.length} 场赛事</div>
+    <div style="margin-top:14px">${list.map(e => `<a class="feat" onclick="openEvent('${e.id}')"><b>${esc(e.name)}</b> <span class="badge ${statusOf(e)}">${STATUS_LABEL[statusOf(e)]}</span><div class="feat-n">${esc(e.platform)} · ${fmtRange(e.start, e.end)}</div></a>`).join("")}</div>`;
 }
 
 /* ---------- WORKS ---------- */
@@ -394,9 +389,6 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#cal-next").onclick = () => { calM++; if (calM > 11) { calM = 0; calY++; } renderMonth(); };
   $("#cal-today").onclick = () => { initCal(); renderMonth(); };
   $$("#cal-mode button").forEach(b => b.onclick = () => { calMode = b.dataset.mode; renderCalendar(); });
-  $$("#cal-density button").forEach(b => b.onclick = () => {
-    trackDensity = +b.dataset.d; $$("#cal-density button").forEach(x => x.classList.toggle("active", x === b)); renderTrack();
-  });
   $("#modal-bg").onclick = (e) => { if (e.target.id === "modal-bg") closeModal(); };
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
   load();
