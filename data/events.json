@@ -1,5 +1,18 @@
 [
   {
+    "id": "xiaohongshu-hackathon-2026",
+    "name": "小红书首届黑客松巅峰赛",
+    "platform": "小红书",
+    "url": "http://sh.people.com.cn/n2/2026/0412/c134768-41549854.html",
+    "start": "2026-04-07",
+    "end": "2026-04-10",
+    "location": "上海·张江科学会堂",
+    "tags": ["AI", "硬件", "国内", "线下"],
+    "prize": "全场大奖 + 软硬件赛道奖",
+    "interest": "watch",
+    "notes": "首届。3月20日启动报名，200名入围选手限时48h开发+路演。超60%为00后，最小12岁。高瓴创投引入，联合张江AI小镇主办。亮点作品：全场大奖「口袋吉他Pocket Guitar」、软件一等奖AI发型设计「Chic Chic」、硬件一等奖「脑控轮椅」。"
+  },
+  {
     "id": "sample-anthropic-claude-builder",
     "name": "Claude Builder Hackathon（示例·待替换）",
     "platform": "Anthropic",
