@@ -194,7 +194,7 @@ function renderCalendar() {
   $$("#cal-mode button").forEach(b => b.classList.toggle("active", b.dataset.mode === calMode));
   $("#cal-legend").innerHTML = month
     ? `<span style="color:var(--text-dim)">同色横条 = 同一赛事，跨越其举办日期</span><span style="color:var(--text-faint)">浅色 = 已结束 · 点击查看详情 · 滚轮翻月</span>`
-    : `<span style="color:var(--text-dim)">共 ${DB.events.length} 场赛事 · 每格 = 一天</span><span class="hm-legend">少 <i class="cell"></i><i class="cell lv1"></i><i class="cell lv2"></i><i class="cell lv3"></i><i class="cell lv4"></i> 多</span><span style="color:var(--text-faint)">⭘ 圈为今天 · 悬停看当天 · 点击查看详情</span>`;
+    : `<span style="color:var(--text-dim)">整年逐月铺开 · 共 ${DB.events.length} 场赛事</span><span style="color:var(--text-faint)">同色横条 = 同一赛事 · 浅色 = 已结束 · 点击查看详情</span>`;
   if (month) renderMonth(); else renderYear();
 }
 
@@ -210,21 +210,19 @@ function monthWheel(ev) {
   renderMonth();
 }
 
-function renderMonth() {
-  if (calY === undefined) initCal();
-  $("#cal-label").textContent = `${calY} 年 ${calM + 1} 月`;
+// 生成某个月的连续色条月历（cell 大、赛事名直接显示在横条里），供月历视图与年视图复用
+function monthGrid(y, m) {
   const tISO = todayISO();
-  const startDow = new Date(calY, calM, 1).getDay();
-  const daysInMonth = new Date(calY, calM + 1, 0).getDate();
+  const startDow = new Date(y, m, 1).getDay();
+  const daysInMonth = new Date(y, m + 1, 0).getDate();
   const weekCount = Math.ceil((startDow + daysInMonth) / 7);
 
-  // 构建周（每周 7 个日期），日期从本月 1 日所在周的周日开始
   const weeks = [];
-  const cur = new Date(calY, calM, 1 - startDow);
+  const cur = new Date(y, m, 1 - startDow);
   for (let w = 0; w < weekCount; w++) {
     const week = [];
     for (let d = 0; d < 7; d++) {
-      week.push({ ds: isoOf(cur), day: cur.getDate(), inMonth: cur.getMonth() === calM, isToday: isoOf(cur) === tISO });
+      week.push({ ds: isoOf(cur), day: cur.getDate(), inMonth: cur.getMonth() === m, isToday: isoOf(cur) === tISO });
       cur.setDate(cur.getDate() + 1);
     }
     weeks.push(week);
@@ -235,11 +233,9 @@ function renderMonth() {
 
   for (const week of weeks) {
     const ws = week[0].ds, we = week[6].ds;
-    // 落在本周的赛事，按开始升序、时长降序排，做车道打包（同赛事一条连续横条）
     const evs = DB.events.filter(e => e.end >= ws && e.start <= we)
       .sort((a, b) => a.start.localeCompare(b.start) || daySpan(b) - daySpan(a));
-    const lanes = []; // lanes[i] = 已占用区间数组
-    const segs = [];
+    const lanes = [], segs = [];
     for (const e of evs) {
       const c0 = e.start < ws ? 0 : week.findIndex(c => c.ds === e.start);
       const c1 = e.end > we ? 6 : week.findIndex(c => c.ds === e.end);
@@ -248,8 +244,7 @@ function renderMonth() {
       (lanes[lane] || (lanes[lane] = [])).push({ c0, c1 });
       segs.push({ e, c0, c1, lane, roundL: e.start >= ws, roundR: e.end <= we });
     }
-    const laneCount = lanes.length;
-    const minH = Math.max(82, 30 + laneCount * 23);
+    const minH = Math.max(94, 30 + lanes.length * 26);
     const bars = segs.map(s => {
       const col = evColor(s.e.id), ended = statusOf(s.e) === "ended";
       return `<span class="cal2-bar ${s.roundL ? "rl" : ""} ${s.roundR ? "rr" : ""}"
@@ -261,63 +256,39 @@ function renderMonth() {
       <div class="cal2-lanes">${bars}</div>
     </div>`;
   }
+  return `<div class="cal2">${html}</div>`;
+}
+
+function renderMonth() {
+  if (calY === undefined) initCal();
+  $("#cal-label").textContent = `${calY} 年 ${calM + 1} 月`;
   const grid = $("#cal-grid");
-  grid.innerHTML = `<div class="cal2">${html}</div>`;
+  grid.innerHTML = monthGrid(calY, calM);
   grid.onwheel = monthWheel;
 }
 
 /* ---------- 年视图（GitHub 贡献图式一年小格子）---------- */
+/* 年视图：整年逐月纵向铺开的连续色条日历，赛事名直接显示在横条里 */
 function renderYear() {
   const wrap = $("#cal-year");
   const evs = DB.events;
   if (!evs.length) { wrap.innerHTML = emptyBlock("还没有赛事"); return; }
   let minISO = evs[0].start, maxISO = evs[0].end;
   for (const e of evs) { if (e.start < minISO) minISO = e.start; if (e.end > maxISO) maxISO = e.end; }
-  // 网格起点 = 最早赛事所在周的周日；终点 = 最晚赛事所在周的周六
-  const start = parseD(minISO); start.setDate(start.getDate() - start.getDay());
-  const end = parseD(maxISO); end.setDate(end.getDate() + (6 - end.getDay()));
-  const tISO = todayISO();
-
-  // 每天 -> 当天赛事（赛事跨天则每天都标）
-  const dayEvents = {};
-  for (const e of evs) {
-    let d = parseD(e.start); const de = parseD(e.end);
-    while (d <= de) { const k = isoOf(d); (dayEvents[k] || (dayEvents[k] = [])).push(e); d.setDate(d.getDate() + 1); }
+  let y = +minISO.slice(0, 4), m = +minISO.slice(5, 7) - 1;
+  const endY = +maxISO.slice(0, 4), endM = +maxISO.slice(5, 7) - 1;
+  let html = "";
+  while (y < endY || (y === endY && m <= endM)) {
+    const cnt = DB.events.filter(e => e.start.slice(0, 7) <= `${y}-${String(m + 1).padStart(2, "0")}` && e.end.slice(0, 7) >= `${y}-${String(m + 1).padStart(2, "0")}`).length;
+    html += `<div class="ym"><div class="ym-title">${y} 年 ${m + 1} 月${cnt ? ` <span class="ym-cnt">${cnt} 场</span>` : ""}</div>${monthGrid(y, m)}</div>`;
+    m++; if (m > 11) { m = 0; y++; }
   }
-
-  const weeks = Math.round((end - start) / (86400000 * 7)) + 1;
-  let cells = "", months = "";
-  const cur = new Date(start); let prevMonth = -1;
-  for (let w = 0; w < weeks; w++) {
-    const colMonth = cur.getMonth();
-    months += `<div class="hm-mcol">${(w === 0 || colMonth !== prevMonth) ? `<span class="hm-mlabel">${colMonth + 1}月</span>` : ""}</div>`;
-    prevMonth = colMonth;
-    for (let d = 0; d < 7; d++) {
-      const k = isoOf(cur);
-      const on = dayEvents[k] || [];
-      let cls = "cell";
-      if (on.length) cls += " lv" + Math.min(on.length, 4);
-      if (k === tISO) cls += " today";
-      cells += `<div class="${cls}" data-d="${k}" title="${esc(k + (on.length ? "：" + on.map(e => e.name).join(" / ") : "（无赛事）"))}"></div>`;
-      cur.setDate(cur.getDate() + 1);
-    }
+  wrap.innerHTML = `<div class="year-stack">${html}</div>`;
+  // 仅当日历视图可见时，把含今天的那个月滚到视图中央
+  if ($("#view-calendar").classList.contains("active")) {
+    const todayCell = wrap.querySelector(".cal2-day.today");
+    if (todayCell) todayCell.scrollIntoView({ block: "center" });
   }
-  const dows = ["", "一", "", "三", "", "五", ""];
-  wrap.innerHTML = `<div class="hm"><div class="hm-inner">
-    <div class="hm-months">${months}</div>
-    <div class="hm-body"><div class="hm-dows">${dows.map(x => `<div class="hm-dow">${x}</div>`).join("")}</div><div class="hm-grid">${cells}</div></div>
-  </div></div>`;
-  wrap.querySelector(".hm-grid").onclick = (ev) => {
-    const c = ev.target.closest(".cell"); if (!c) return;
-    const list = dayEvents[c.dataset.d]; if (!list || !list.length) return;
-    if (list.length === 1) openEvent(list[0].id); else showModal(dayListHtml(c.dataset.d, list));
-  };
-}
-function dayListHtml(iso, list) {
-  return `<span class="modal-close" onclick="closeModal()">×</span>
-    <h3>${fmtDate(iso)}</h3>
-    <div style="color:var(--text-faint);font-size:.82rem">当天 ${list.length} 场赛事</div>
-    <div style="margin-top:14px">${list.map(e => `<a class="feat" onclick="openEvent('${e.id}')"><b>${esc(e.name)}</b> <span class="badge ${statusOf(e)}">${STATUS_LABEL[statusOf(e)]}</span><div class="feat-n">${esc(e.platform)} · ${fmtRange(e.start, e.end)}</div></a>`).join("")}</div>`;
 }
 
 /* ---------- WORKS ---------- */
